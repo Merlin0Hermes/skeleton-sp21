@@ -107,18 +107,77 @@ public class Model extends Observable {
      *    and the trailing tile does not.
      * */
     public boolean tilt(Side side) {
-        boolean changed;
-        changed = false;
+        boolean changed = false;
+        int changes = 0;
 
-        // TODO: Modify this.board (and perhaps this.score) to account
-        // for the tilt to the Side SIDE. If the board changed, set the
-        // changed local variable to true.
+        board.setViewingPerspective(side);
+        for (int col = 0; col < board.size(); ++col) {
 
+            changes += processColumn(col);
+        }
+        if (changes > 0) {
+            changed = true;
+        }
+        board.setViewingPerspective(side.NORTH);
         checkGameOver();
         if (changed) {
             setChanged();
         }
         return changed;
+    }
+
+
+    public int processColumn(int col) {
+        Tile[] tiles = new Tile[board.size()];
+        for (int i = 0; i < board.size(); ++i) {
+            tiles[i] = board.tile(col, i);
+        }
+        int changes = 0;
+        if (isNull(tiles)) {
+            return changes;
+        }
+        boolean[] moved = new boolean[board.size()];
+
+        for (int i = board.size() - 2; i >= 0; --i) {
+            if (board.tile(col, i) == null) {
+                continue;
+            }
+            boolean obstacles = false;
+            for (int j = i + 1; j < board.size(); ++j) {
+                if (board.tile(col, j) != null) {
+                    if (board.tile(col, j).value() != board.tile(col, i).value()) {
+                        obstacles = true;
+                    }
+                    if (!obstacles && board.tile(col, i) != null && !moved[j] && board.tile(col, j).value() == board.tile(col, i).value()) {
+                        board.move(col, j, board.tile(col, i));
+                        score += board.tile(col, j).value();
+                        moved[j] = true;
+                        ++changes;
+                        break;
+                    }
+                    else if (j - 1 >= 0 && board.tile(col, j - 1) == null) {
+                        board.move(col, j - 1, board.tile(col, i));
+                        ++changes;
+                        break;
+                    }
+                }
+                else if (board.tile(col, j) == null && j == board.size() - 1) {
+                    board.move(col, j, board.tile(col, i));
+                    ++changes;
+                    break;
+                }
+            }
+        }
+        return changes;
+    }
+
+    public static boolean isNull(Tile[] column) {
+        for (Tile tile : column) {
+            if (tile != null) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /** Checks if the game is over and sets the gameOver variable
