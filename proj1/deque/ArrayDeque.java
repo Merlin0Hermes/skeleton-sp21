@@ -35,11 +35,10 @@ public class ArrayDeque<T> {
         if (nextLast == items.length) {
             nextLast = 0;
         }
-
     }
 
     public T getLast() {
-        return items[size - 1];
+        return items[lastIndex()];
     }
 
     public T get(int i) {
@@ -50,17 +49,26 @@ public class ArrayDeque<T> {
         return size;
     }
 
+    private int lastIndex() {
+        if ((nextLast - 1) < 0) {
+            return items.length - 1;
+        }
+        return nextLast - 1;
+    }
+
     public T removeLast() {
         T item = getLast();
-        items[size - 1] = null;
+        items[lastIndex()] = null;
         --size;
         return item;
     }
 
     public static void main(String[] args) {
         ArrayDeque<Integer> list = new ArrayDeque<>();
+        int it;
         for (int i = 0; i < 100000; ++i) {
             list.addLast(i);
+            it = list.getLast();
         }
     }
 }
