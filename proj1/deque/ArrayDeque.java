@@ -1,7 +1,5 @@
 package deque;
 
-import java.sql.Array;
-
 public class ArrayDeque<T> {
     private T[] items;
     private int size;
@@ -100,8 +98,21 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
+        if (isEmpty()) return null;
+
         T item = getLast();
         items[lastIndex()] = null;
+        nextLast = lastIndex();
+        --size;
+        return item;
+    }
+
+    public T removeFirst() {
+        if (isEmpty()) return null;
+
+        T item = getFirst();
+        items[firstIndex()] = null;
+        nextFirst = firstIndex();
         --size;
         return item;
     }
@@ -119,6 +130,10 @@ public class ArrayDeque<T> {
             }
         }
         System.out.println();
+    }
+
+    public boolean isEmpty() {
+        return size() == 0;
     }
 
     public static void main(String[] args) {
