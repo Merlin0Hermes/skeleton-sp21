@@ -41,6 +41,20 @@ public class ArrayDeque<T> {
         return items[lastIndex()];
     }
 
+    public void addFirst(T item) {
+        items[nextFirst] = item;
+        ++size;
+        --nextFirst;
+
+        if (nextFirst < 0) {
+            nextFirst = items.length - 1;
+        }
+    }
+
+    public T getFirst() {
+        return items[firstIndex()];
+    }
+
     public T get(int i) {
         return items[i];
     }
@@ -56,6 +70,13 @@ public class ArrayDeque<T> {
         return nextLast - 1;
     }
 
+    private int firstIndex() {
+        if ((nextFirst + 1) >= items.length) {
+            return 0;
+        }
+        return nextFirst + 1;
+    }
+
     public T removeLast() {
         T item = getLast();
         items[lastIndex()] = null;
@@ -67,8 +88,8 @@ public class ArrayDeque<T> {
         ArrayDeque<Integer> list = new ArrayDeque<>();
         int it;
         for (int i = 0; i < 100000; ++i) {
-            list.addLast(i);
-            it = list.getLast();
+            list.addFirst(i);
+            it = list.getFirst();
         }
     }
 }
