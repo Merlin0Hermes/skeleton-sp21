@@ -84,12 +84,27 @@ public class ArrayDeque<T> {
         return item;
     }
 
+    public void printDeque() {
+        int i = firstIndex();
+        while (items[i] != null) {
+            System.out.print(items[i] + " ");
+            ++i;
+            if (i == items.length) {
+                i = 0;
+            }
+            if (i == nextLast) {
+                break;
+            }
+        }
+        System.out.println();
+    }
+
     public static void main(String[] args) {
         ArrayDeque<Integer> list = new ArrayDeque<>();
         int it;
-        for (int i = 0; i < 100000; ++i) {
-            list.addFirst(i);
-            it = list.getFirst();
+        for (int i = 0; i < 2; ++i) {
+            list.addLast(i);
         }
+        list.printDeque();
     }
 }
