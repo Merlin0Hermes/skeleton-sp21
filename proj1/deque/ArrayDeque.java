@@ -15,23 +15,41 @@ public class ArrayDeque<T> {
         nextLast = 4;
     }
 
-//    private void resize(int capacity) {
-//        T[] arr = (T[]) new Object[capacity];
-//        System.arraycopy(items, 0, arr, 0,  nextLast);
-//        System.arraycopy(items, nextFirst, arr, capacity - (size / 2),  (size - nextFirst));
-//
-//        items = arr;
-//    }
+    private void resize(int capacity) {
+        T[] arr = (T[]) new Object[capacity];
+        int i = firstIndex();
+        int j = capacity / 4;
+        nextFirst = j - 1;
+
+        while (items[i] != null) {
+            arr[j] = items[i];
+            ++i;
+            ++j;
+            if (i == items.length) {
+                i = 0;
+            }
+            if (i == nextLast) {
+                break;
+            }
+        }
+
+        nextLast = j;
+        items = arr;
+    }
+
+    private void increaseCapacity() {
+        double RFACTOR = 2;
+        resize((int) Math.ceil(size * RFACTOR));
+    }
 
     public void addLast(T item) {
-//        double RFACTOR = 2;
-//        if (size == items.length) {
-//            resize((int) Math.ceil(size * RFACTOR));
-//            nextFirst = nextFirst + size;
-//        }
+        if (size == items.length) {
+            increaseCapacity();
+        }
         items[nextLast] = item;
         ++size;
         ++nextLast;
+
         if (nextLast == items.length) {
             nextLast = 0;
         }
@@ -42,6 +60,10 @@ public class ArrayDeque<T> {
     }
 
     public void addFirst(T item) {
+        if (size == items.length) {
+            increaseCapacity();
+        }
+
         items[nextFirst] = item;
         ++size;
         --nextFirst;
@@ -102,9 +124,11 @@ public class ArrayDeque<T> {
     public static void main(String[] args) {
         ArrayDeque<Integer> list = new ArrayDeque<>();
         int it;
-        for (int i = 0; i < 2; ++i) {
-            list.addLast(i);
+        for (int i = 0; i < 100; ++i) {
+            if (i % 2 == 0) list.addLast(i);
+            else list.addFirst(i);
         }
+
         list.printDeque();
     }
 }
