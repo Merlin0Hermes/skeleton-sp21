@@ -1,0 +1,95 @@
+package deque;
+
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class TestArrayDeque {
+    private ArrayDeque<Integer> deque;
+
+    @Before
+    public void setUp() {
+        deque = new ArrayDeque<>();
+    }
+
+    @Test
+    public void testAddFirst() {
+        deque.addFirst(1);
+        assertFalse(deque.isEmpty());
+        assertEquals(1, deque.size());
+        deque.addFirst(2);
+        assertEquals(2, deque.size());
+    }
+
+    @Test
+    public void testAddLast() {
+        deque.addLast(1);
+        assertFalse(deque.isEmpty());
+        assertEquals(1, deque.size());
+        deque.addLast(2);
+        assertEquals(2, deque.size());
+    }
+
+    @Test
+    public void testIsEmpty() {
+        assertTrue(deque.isEmpty());
+        deque.addFirst(1);
+        assertFalse(deque.isEmpty());
+        deque.removeFirst();
+        assertTrue(deque.isEmpty());
+    }
+
+    @Test
+    public void testSize() {
+        assertEquals(0, deque.size());
+        deque.addFirst(1);
+        assertEquals(1, deque.size());
+        deque.addLast(2);
+        assertEquals(2, deque.size());
+        deque.removeFirst();
+        assertEquals(1, deque.size());
+        deque.removeLast();
+        assertEquals(0, deque.size());
+    }
+
+    @Test
+    public void testPrintDeque() {
+        // This test will check if the printDeque method works correctly.
+        // You can redirect the output stream to capture printed output if needed.
+        deque.addFirst(1);
+        deque.addLast(2);
+        deque.addLast(3);
+        // Expected output: "1 2 3\n"
+        // You can use a ByteArrayOutputStream to capture the output if necessary.
+    }
+
+    @Test
+    public void testRemoveFirst() {
+        assertNull(deque.removeFirst()); // Should return null for empty deque
+        deque.addFirst(1);
+        assertEquals(Integer.valueOf(1), deque.removeFirst());
+        assertTrue(deque.isEmpty());
+    }
+
+    @Test
+    public void testRemoveLast() {
+        assertNull(deque.removeLast()); // Should return null for empty deque
+        deque.addLast(1);
+        assertEquals(Integer.valueOf(1), deque.removeLast());
+        assertTrue(deque.isEmpty());
+    }
+
+    @Test
+    public void testMultipleOperations() {
+        deque.addFirst(1);
+        deque.addLast(2);
+        deque.addFirst(3);
+        assertEquals(3, deque.size());
+        assertEquals(Integer.valueOf(3), deque.removeFirst());
+        assertEquals(Integer.valueOf(2), deque.removeLast());
+        assertEquals(1, deque.size());
+        assertEquals(Integer.valueOf(1), deque.removeFirst());
+        assertTrue(deque.isEmpty());
+    }
+
+}
