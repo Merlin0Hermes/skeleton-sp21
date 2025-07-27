@@ -76,7 +76,7 @@ public class ArrayDeque<T> {
     }
 
     public T get(int index) {
-        if (index < 0) {
+        if (index < 0 || index > this.size()) {
             return null;
         }
         int i = firstIndex();
