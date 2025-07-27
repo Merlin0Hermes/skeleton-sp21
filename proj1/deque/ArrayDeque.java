@@ -75,7 +75,21 @@ public class ArrayDeque<T> {
         return items[firstIndex()];
     }
 
-    public T get(int i) {
+    public T get(int index) {
+        if (index < 0) {
+            return null;
+        }
+        int i = firstIndex();
+        while (index > 0) {
+            if (i == items.length) {
+                i = 0;
+            }
+            if (i == nextLast) {
+                return null;
+            }
+            ++i;
+            --index;
+        }
         return items[i];
     }
 

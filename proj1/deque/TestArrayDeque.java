@@ -92,4 +92,20 @@ public class TestArrayDeque {
         assertTrue(deque.isEmpty());
     }
 
+    @Test
+    public void testGet() {
+        deque.addFirst(1); // index 0
+        assertEquals(Integer.valueOf(1), deque.get(0));
+        deque.addLast(-1);
+        deque.addLast(10);
+        deque.addLast(-107); // index 3
+        assertEquals(Integer.valueOf(-107), deque.get(3));
+        deque.removeLast();
+        assertEquals(Integer.valueOf(10), deque.get(2));
+        assertNull(deque.get(3));
+        assertNull(deque.get(5));
+        assertNull(deque.get(-1));
+
+    }
+
 }
