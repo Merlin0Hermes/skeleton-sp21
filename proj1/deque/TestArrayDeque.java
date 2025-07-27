@@ -54,13 +54,12 @@ public class TestArrayDeque {
 
     @Test
     public void testPrintDeque() {
-        // This test will check if the printDeque method works correctly.
-        // You can redirect the output stream to capture printed output if needed.
         deque.addFirst(1);
-        deque.addLast(2);
-        deque.addLast(3);
-        // Expected output: "1 2 3\n"
-        // You can use a ByteArrayOutputStream to capture the output if necessary.
+        deque.addFirst(2);
+        deque.addLast(4);
+        deque.addFirst(8);
+        deque.addLast(10);
+        deque.printDeque(); // output should be: 8 2 1 4 10
     }
 
     @Test
