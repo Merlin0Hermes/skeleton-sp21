@@ -15,20 +15,12 @@ public class ArrayDeque<T> {
 
     private void resize(int capacity) {
         T[] arr = (T[]) new Object[capacity];
-        int i = firstIndex();
         int j = capacity / 4;
         nextFirst = j - 1;
 
-        while (items[i] != null) {
+        for (int i = 0; i < size(); ++i) {
             arr[j] = items[i];
-            ++i;
             ++j;
-            if (i == items.length) {
-                i = 0;
-            }
-            if (i == nextLast) {
-                break;
-            }
         }
 
         nextLast = j;
@@ -132,16 +124,9 @@ public class ArrayDeque<T> {
     }
 
     public void printDeque() {
-        int i = firstIndex();
-        while (items[i] != null) {
-            System.out.print(items[i] + " ");
-            ++i;
-            if (i == items.length) {
-                i = 0;
-            }
-            if (i == nextLast) {
-                break;
-            }
+        for (int i = 0; i < size(); ++i) {
+            T item = get(i);
+            System.out.print(item + " ");
         }
         System.out.println();
     }
