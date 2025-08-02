@@ -145,14 +145,22 @@ public class ArrayDeque<T> implements  Deque<T> {
         return size() == 0;
     }
 
-    public static void main(String[] args) {
-        ArrayDeque<Integer> list = new ArrayDeque<>();
-        int it;
-        for (int i = 0; i < 100; ++i) {
-            if (i % 2 == 0) list.addLast(i);
-            else list.addFirst(i);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
         }
-
-        list.printDeque();
+        if (! (o instanceof ArrayDeque<?> arr)) {
+            return false;
+        }
+        if (this.size != arr.size()) {
+            return false;
+        }
+        for (int i = 0; i < this.size(); ++i) {
+            if (! this.get(i).equals(arr.get(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 }

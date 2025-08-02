@@ -34,4 +34,10 @@ public interface Deque<T> {
     /** get the last item without removing it. */
     public T getLast();
 
+    /** returns true if deque is equal to o.
+     * That is, if o is same size as o
+     * and o contains same items as deque
+     * in the same order.
+     */
+    public boolean equals(Object o);
 }

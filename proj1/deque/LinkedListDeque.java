@@ -116,4 +116,23 @@ public class LinkedListDeque<T> implements  Deque<T> {
     public T getFirst() {
         return sentinel.next.item;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (! (o instanceof LinkedListDeque<?> list)) {
+            return false;
+        }
+        if (this.size != list.size()) {
+            return false;
+        }
+        for (int i = 0; i < this.size(); ++i) {
+            if (! this.get(i).equals(list.get(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
