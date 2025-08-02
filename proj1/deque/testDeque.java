@@ -30,6 +30,5 @@ public class testDeque {
             arr.addFirst(i);
         }
         assertEquals(list, arr);
-
     }
 }
