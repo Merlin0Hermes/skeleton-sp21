@@ -1,5 +1,7 @@
 package deque;
 
+import java.util.Iterator;
+
 public interface Deque<T> {
 
     /** add item to front of deque. */
@@ -40,4 +42,8 @@ public interface Deque<T> {
      * in the same order.
      */
     public boolean equals(Object o);
+
+    /** iterator method */
+
+    public Iterator<T> iterator();
 }

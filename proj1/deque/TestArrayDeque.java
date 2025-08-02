@@ -107,4 +107,17 @@ public class TestArrayDeque {
 
     }
 
+    @Test
+    public void iterationTest() {
+        ArrayDeque<Integer> arr = new ArrayDeque<>();
+        for (int i = 0; i < 16; ++i) {
+            arr.addLast(i);
+        }
+        for (int i: arr) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+
+    }
 }
+

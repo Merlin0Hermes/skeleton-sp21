@@ -27,12 +27,17 @@ public class LinkedListDeque<T> implements  Deque<T>, Iterable<T> {
     private class LinkedListDequeIterator implements Iterator<T> {
         private Node<T> node = new Node<>();
 
+
         public LinkedListDequeIterator() {
             node = sentinel.next;
         }
+
+        @Override
         public boolean hasNext() {
             return node != sentinel;
         }
+
+        @Override
         public T next() {
             node = node.next;
             return node.prev.item;
