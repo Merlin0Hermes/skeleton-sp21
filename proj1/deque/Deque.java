@@ -44,6 +44,5 @@ public interface Deque<T> {
     public boolean equals(Object o);
 
     /** iterator method */
-
     public Iterator<T> iterator();
 }
