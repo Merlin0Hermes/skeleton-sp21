@@ -32,6 +32,7 @@ public class ArrayDeque<T> implements  Deque<T> {
         resize((int) Math.ceil(size * RFACTOR));
     }
 
+    @Override
     public void addLast(T item) {
         if (size == items.length) {
             increaseCapacity();
@@ -45,10 +46,12 @@ public class ArrayDeque<T> implements  Deque<T> {
         }
     }
 
+    @Override
     public T getLast() {
         return items[lastIndex()];
     }
 
+    @Override
     public void addFirst(T item) {
         if (size == items.length) {
             increaseCapacity();
@@ -63,10 +66,12 @@ public class ArrayDeque<T> implements  Deque<T> {
         }
     }
 
+    @Override
     public T getFirst() {
         return items[firstIndex()];
     }
 
+    @Override
     public T get(int index) {
         if (index < 0 || index > this.size()) {
             return null;
@@ -85,6 +90,7 @@ public class ArrayDeque<T> implements  Deque<T> {
         return items[i];
     }
 
+    @Override
     public int size() {
         return size;
     }
@@ -103,6 +109,7 @@ public class ArrayDeque<T> implements  Deque<T> {
         return nextFirst + 1;
     }
 
+    @Override
     public T removeLast() {
         if (isEmpty()) return null;
 
@@ -113,6 +120,7 @@ public class ArrayDeque<T> implements  Deque<T> {
         return item;
     }
 
+    @Override
     public T removeFirst() {
         if (isEmpty()) return null;
 
@@ -123,6 +131,7 @@ public class ArrayDeque<T> implements  Deque<T> {
         return item;
     }
 
+    @Override
     public void printDeque() {
         for (int i = 0; i < size(); ++i) {
             T item = get(i);
@@ -131,6 +140,7 @@ public class ArrayDeque<T> implements  Deque<T> {
         System.out.println();
     }
 
+    @Override
     public boolean isEmpty() {
         return size() == 0;
     }

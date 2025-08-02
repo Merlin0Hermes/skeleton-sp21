@@ -27,4 +27,11 @@ public interface Deque<T> {
      * or if index is invalid.
      */
     public T get(int index);
+
+    /** get the first item without removing it. */
+    public T getFirst();
+
+    /** get the last item without removing it. */
+    public T getLast();
+
 }
