@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class testDeque {
+public class TestDeque {
 
     @Test
     public void testEquals() {

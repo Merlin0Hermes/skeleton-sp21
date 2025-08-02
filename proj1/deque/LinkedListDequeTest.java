@@ -133,4 +133,18 @@ public class LinkedListDequeTest {
         assertEquals(10, (int) list.getFirst());
 
     }
+
+    @Test
+    public void iterationTest() {
+        LinkedListDeque<Integer> list = new LinkedListDeque<>();
+        for (int i = 0; i < 5; ++i) {
+            list.addLast(i);
+            list.addFirst(i + 1);
+        }
+        for (int i: list) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+
+    }
 }
