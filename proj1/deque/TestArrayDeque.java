@@ -97,14 +97,16 @@ public class TestArrayDeque {
         assertEquals(Integer.valueOf(1), deque.get(0));
         deque.addLast(-1);
         deque.addLast(10);
-        deque.addLast(-107); // index 3
-        assertEquals(Integer.valueOf(-107), deque.get(3));
+        for (int i = 0; i < 10; ++i) {
+            deque.addLast(i);
+        }
+        deque.addLast(-107); // index 2
+        assertEquals(Integer.valueOf(-107), deque.get(13));
         deque.removeLast();
         assertEquals(Integer.valueOf(10), deque.get(2));
-        assertNull(deque.get(3));
-        assertNull(deque.get(5));
+        assertNull(deque.get(14));
+        assertNull(deque.get(100));
         assertNull(deque.get(-1));
-
     }
 
     @Test
