@@ -157,11 +157,6 @@ public class ArrayDeque<T> implements  Deque<T>, Iterable<T> {
     }
 
     @Override
-    public boolean isEmpty() {
-        return size() == 0;
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

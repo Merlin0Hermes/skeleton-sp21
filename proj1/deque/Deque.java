@@ -10,9 +10,6 @@ public interface Deque<T> {
     /** add item to back of deque */
     public void addLast(T item);
 
-    /** return true if deque is empty. */
-    public boolean isEmpty();
-
     /** returns the current size (number of items in deque) */
     public int size();
 
@@ -45,4 +42,10 @@ public interface Deque<T> {
 
     /** iterator method */
     public Iterator<T> iterator();
+
+    /** return true if deque is empty. */
+    default public boolean isEmpty() {
+        return size() == 0;
+    }
+
 }
