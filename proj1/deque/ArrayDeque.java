@@ -18,11 +18,11 @@ public class ArrayDeque<T> implements  Deque<T> {
         int j = capacity / 4;
 
         for (int i = 0; i < size(); ++i) {
-            arr[j] = items[i];
+            arr[j] = this.get(i);
             ++j;
         }
 
-        nextFirst =
+        nextFirst = (capacity / 4) - 1;
         nextLast = j;
         items = arr;
     }
@@ -80,9 +80,6 @@ public class ArrayDeque<T> implements  Deque<T> {
         while (index > 0) {
             if (i == items.length) {
                 i = 0;
-            }
-            if (i == nextLast) {
-                return null;
             }
             ++i;
             --index;
