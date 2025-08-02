@@ -16,13 +16,13 @@ public class ArrayDeque<T> implements  Deque<T> {
     private void resize(int capacity) {
         T[] arr = (T[]) new Object[capacity];
         int j = capacity / 4;
-        nextFirst = j - 1;
 
         for (int i = 0; i < size(); ++i) {
             arr[j] = items[i];
             ++j;
         }
 
+        nextFirst =
         nextLast = j;
         items = arr;
     }
@@ -87,6 +87,9 @@ public class ArrayDeque<T> implements  Deque<T> {
             ++i;
             --index;
         }
+        if (i == items.length) {
+            i = 0;
+        }
         return items[i];
     }
 
@@ -150,14 +153,14 @@ public class ArrayDeque<T> implements  Deque<T> {
         if (this == o) {
             return true;
         }
-        if (! (o instanceof ArrayDeque<?> arr)) {
+        if (! (o instanceof Deque<?> deque)) {
             return false;
         }
-        if (this.size != arr.size()) {
+        if (this.size != deque.size()) {
             return false;
         }
         for (int i = 0; i < this.size(); ++i) {
-            if (! this.get(i).equals(arr.get(i))) {
+            if (! this.get(i).equals(deque.get(i))) {
                 return false;
             }
         }
