@@ -43,9 +43,8 @@ public class ArrayDeque<T> implements  Deque<T>, Iterable<T> {
         T[] arr = (T[]) new Object[capacity];
         int j = capacity / 4;
 
-        for (int i = 0; i < size(); ++i) {
-            arr[j] = this.get(i);
-            ++j;
+        for (T item : this) {
+            arr[j++] = item;
         }
 
         nextFirst = (capacity / 4) - 1;
@@ -99,21 +98,13 @@ public class ArrayDeque<T> implements  Deque<T>, Iterable<T> {
 
     @Override
     public T get(int index) {
-        if (index < 0 || index > this.size()) {
-            return null;
-        }
-        int i = firstIndex();
-        while (index > 0) {
-            if (i == items.length) {
-                i = 0;
+        for (T item : this) {
+            if (index == 0) {
+                return item;
             }
-            ++i;
             --index;
         }
-        if (i == items.length) {
-            i = 0;
-        }
-        return items[i];
+        return null;
     }
 
     @Override
@@ -159,8 +150,7 @@ public class ArrayDeque<T> implements  Deque<T>, Iterable<T> {
 
     @Override
     public void printDeque() {
-        for (int i = 0; i < size(); ++i) {
-            T item = get(i);
+        for (T item : this) {
             System.out.print(item + " ");
         }
         System.out.println();

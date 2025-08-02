@@ -92,10 +92,8 @@ public class LinkedListDeque<T> implements  Deque<T>, Iterable<T> {
 
     @Override
     public void printDeque() {
-        Node<T> p = sentinel.next;
-        while(p != sentinel) {
-            System.out.print(p.item + " ");
-            p = p.next;
+        for (T item : this) {
+            System.out.print(item + " ");
         }
         System.out.println();
     }
@@ -121,12 +119,13 @@ public class LinkedListDeque<T> implements  Deque<T>, Iterable<T> {
 
     @Override
     public T get(int index) {
-        Node<T> p = sentinel.next;
-        while (index != 0 && p != sentinel) {
-            p = p.next;
+        for (T item : this) {
+            if (index == 0) {
+                return item;
+            }
             --index;
         }
-        return p.item;
+        return null;
     }
 
     @Override
