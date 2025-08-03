@@ -119,7 +119,21 @@ public class TestArrayDeque {
             System.out.print(i + " ");
         }
         System.out.println();
+    }
 
+    @Test
+    public void resizeTest() {
+        ArrayDeque<Integer> deque = new ArrayDeque<>();
+        for (int i = 0; i < 2000; ++i) {
+            deque.addLast(i);
+        }
+        for (int i = 0; i < 2000; ++i) {
+            deque.removeLast();
+        }
+        assertNull(deque.getFirst());
+        for (int i = 0; i < 3200; ++i) {
+            deque.addLast(i);
+        }
     }
 }
 

@@ -54,14 +54,22 @@ public class ArrayDeque<T> implements  Deque<T>, Iterable<T> {
 
     private void increaseCapacity() {
         double RFACTOR = 2;
-        resize((int) Math.ceil(size * RFACTOR));
+        if (size == items.length) {
+            resize((int) Math.ceil(size * RFACTOR));
+        }
+    }
+
+    private void decreaseCapacity() {
+        double RFACTOR = 4;
+        if ((size < items.length / RFACTOR) && (size > 4)) {
+            resize((int) Math.ceil(items.length / RFACTOR) + size() / 2);
+        }
     }
 
     @Override
     public void addLast(T item) {
-        if (size == items.length) {
-            increaseCapacity();
-        }
+        increaseCapacity();
+
         items[nextLast] = item;
         ++size;
         ++nextLast;
@@ -78,9 +86,7 @@ public class ArrayDeque<T> implements  Deque<T>, Iterable<T> {
 
     @Override
     public void addFirst(T item) {
-        if (size == items.length) {
             increaseCapacity();
-        }
 
         items[nextFirst] = item;
         ++size;
@@ -129,6 +135,7 @@ public class ArrayDeque<T> implements  Deque<T>, Iterable<T> {
     @Override
     public T removeLast() {
         if (isEmpty()) return null;
+        decreaseCapacity();
 
         T item = getLast();
         items[lastIndex()] = null;
@@ -140,6 +147,7 @@ public class ArrayDeque<T> implements  Deque<T>, Iterable<T> {
     @Override
     public T removeFirst() {
         if (isEmpty()) return null;
+        decreaseCapacity();
 
         T item = getFirst();
         items[firstIndex()] = null;
