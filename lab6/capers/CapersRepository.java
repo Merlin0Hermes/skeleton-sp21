@@ -49,6 +49,7 @@ public class CapersRepository {
         File f = new File(Utils.join(CAPERS_FOLDER, "story.txt").toURI());
         String newText = Utils.readContentsAsString(f) + text + '\n';
         Utils.writeContents(f, newText);
+        System.out.println(Utils.readContentsAsString(f));
     }
 
     /**
@@ -71,6 +72,6 @@ public class CapersRepository {
     public static void celebrateBirthday(String name) {
         Dog dog = Dog.fromFile(name);
         dog.haveBirthday();
-        System.out.println(dog);
+        dog.saveDog();
     }
 }
