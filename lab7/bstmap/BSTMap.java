@@ -25,7 +25,6 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
     private int size;
 
     public BSTMap() {
-        tree = new BSTNode();
         int size = 0;
     }
     public BSTMap(K k, V v) {
@@ -35,7 +34,8 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
 
     @Override
     public void clear() {
-        tree = new BSTNode();
+        tree = null;
+        size = 0;
     }
 
     private BSTNode find(BSTNode T, K key) {
@@ -60,7 +60,11 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
 
     @Override
     public V get(K key) {
-        return find(tree, key).value;
+        BSTNode node = find(tree, key);
+        if (node == null) {
+            return null;
+        }
+        return node.value;
     }
 
     private BSTNode insert(BSTNode T, K key, V value) {
@@ -78,7 +82,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
 
     @Override
     public void put(K key, V value) {
-        insert(tree, key, value);
+        tree = insert(tree, key, value);
         ++size;
     }
 
