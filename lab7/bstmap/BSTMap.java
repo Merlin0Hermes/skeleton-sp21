@@ -3,8 +3,7 @@ package bstmap;
 import java.util.Iterator;
 import java.util.Set;
 
-public class BSTMap<K, V> implements Map61B<K, V> {
-
+public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
 
     private class BSTNode {
         K key;
@@ -12,10 +11,41 @@ public class BSTMap<K, V> implements Map61B<K, V> {
         BSTNode left;
         BSTNode right;
 
+        public BSTNode() {
+        }
         public BSTNode(K k, V v) {
             key = k;
             value = v;
         }
+    }
+
+    BSTNode tree;
+
+    public BSTMap() {
+        tree = new BSTNode();
+    }
+    public BSTMap(K k, V v) {
+        tree = new BSTNode(k, v);
+    }
+
+    private BSTNode find(BSTNode T, K key) {
+        if (T == null) {
+            return null;
+        }
+        if (T.key.equals(key)) {
+            return T;
+        }
+        else if (key.compareTo(T.key) < 0) {
+            return find(T.left, key);
+        }
+        else {
+            return find(T.right, key);
+        }
+    }
+
+    @Override
+    public boolean containsKey(K key) {
+        return find(tree, key) != null;
     }
 
     @Override
