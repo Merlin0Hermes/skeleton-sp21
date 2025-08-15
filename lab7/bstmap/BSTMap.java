@@ -28,6 +28,11 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         tree = new BSTNode(k, v);
     }
 
+    @Override
+    public void clear() {
+        tree = new BSTNode();
+    }
+
     private BSTNode find(BSTNode T, K key) {
         if (T == null) {
             return null;
