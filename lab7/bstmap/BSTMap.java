@@ -4,6 +4,7 @@ import edu.princeton.cs.algs4.BST;
 
 import java.util.Iterator;
 import java.util.Set;
+import java.util.Stack;
 
 public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
 
@@ -19,6 +20,35 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
             key = k;
             value = v;
         }
+    }
+
+    private class BSTMapIterator implements Iterator<K>{
+
+        Stack<BSTNode> stack = new Stack<>();
+
+        private BSTMapIterator() {
+            push(tree);
+        }
+
+        private void push(BSTNode node) {
+            while (node != null) {
+                stack.push(node);
+                node = node.left;
+            }
+        }
+
+        @Override
+        public boolean hasNext() {
+            return !stack.isEmpty();
+        }
+
+        @Override
+        public K next() {
+            BSTNode node = stack.pop();
+            push(node.right);
+            return node.key;
+        }
+
     }
 
     private BSTNode tree;
@@ -109,5 +139,10 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
     @Override
     public Iterator<K> iterator() {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public K next() {
+
     }
 }
