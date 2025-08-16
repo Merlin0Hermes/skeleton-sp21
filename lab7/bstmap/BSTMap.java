@@ -122,14 +122,62 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         return size;
     }
 
+    private BSTNode delete(BSTNode T, K key) {
+        if (T == null) {
+            return null;
+        }
+
+        if (key.compareTo(T.key) < 0) {
+            T.left = delete(T.left, key);
+        }
+        else if (key.compareTo(T.key) > 0) {
+            T.right = delete(T.right, key);
+        }
+        else {
+            if (T.left == null) {
+                return T.right;
+            }
+            else if (T.right == null) {
+                return T.left;
+            }
+
+            BSTNode successor = minNode(T.right);
+            T.key = successor.key;
+            T.value = successor.value;
+            T.right = delete(T.right, T.key);
+        }
+        return T;
+    }
+
+    private BSTNode minNode(BSTNode T) {
+        while (T.left != null) {
+            T = T.left;
+        }
+        return T;
+    }
+
     @Override
     public V remove(K key) {
-        throw new UnsupportedOperationException();
+        V val = get(key);
+        if (val == null) {
+            return null;
+        }
+        tree = delete(tree, key);
+        --size;
+        return val;
     }
 
     @Override
     public V remove(K key, V value) {
-        throw new UnsupportedOperationException();
+        V val = get(key);
+        if (val == null) {
+            return null;
+        }
+        if (val.equals(value)) {
+            remove(key);
+            --size;
+        }
+        return val;
     }
 
     @Override
